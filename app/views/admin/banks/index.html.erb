@@ -1,0 +1,32 @@
+<h1>Listing banks</h1>
+  
+<table id="bank-table-id" class="table">
+<thead class="thead-light">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Actions</th>
+  </tr>
+ </thead>
+ <tbody>
+  <% @banks.each do |bank| %>
+    <tr>
+      <td><%= bank.title %></td>
+      <td>
+       <button class="btn btn-light"><%= link_to 'Destroy', admin_bank_path(bank), method: :delete, data: { confirm: 'Are you sure?' } %></button>
+       
+       <button class="btn btn-light"><%= link_to 'Edit', edit_admin_bank_path(bank) %></button>
+      
+       <button class="btn btn-light"><%= link_to 'Show', admin_bank_path(bank) %></button>
+     </td>
+      
+
+    </tr>
+    <%end%>
+ </tbody>
+ </thead>
+ </table>
+ <script>
+ $(document).ready( function () {
+  $('#bank-table-id').DataTable();
+} );
+ </script>

@@ -1,0 +1,36 @@
+<div class="text-dark bg-light"><h1>All users</h1></div>
+
+<table id="user-table-id" class="table">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">FirstName</th>
+    <th scope="col">LastName</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Email</th>
+    <th scope="col">Role</th>
+    <th scope="col">Action</th>
+  </tr>
+ </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+     <tr>
+      <td><%= user.firstname %></td>
+      <td><%= user.lastname %></td>
+      <td><%= user.phone %></td>
+      <td><%= user.email %></td>
+      <td><%= user.role %></td>
+      <td> <button class="btn btn-light"><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
+     </button>  </td>
+     </tr>
+     
+    <%end%>
+  </tbody>
+</table>
+
+<br>
+<script>
+ $(document).ready( function () {
+  $('#user-table-id').DataTable();
+} );
+ </script>
