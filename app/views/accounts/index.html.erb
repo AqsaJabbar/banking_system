@@ -1,0 +1,47 @@
+<h1>Listing Accounts</h1>
+  
+<table id="account-table-id" class="table">
+<thead class="thead-light">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Account Number</th>
+    <th scope="col">Type</th>
+    <th scope="col">Balance</th>
+    <th scope="col">Holder</th>
+    <th scope="col">Bank</th>
+    <th scope="col">Status</th>
+    <th scope="col">Actions</th>
+  </tr>
+ </thead>
+ <tbody>
+  <% @accounts.each do |account| %>
+    <tr>
+      <td><%= account.title %></td>
+      <td><%= account.account_no %></td>
+      <td><%= account.account_type %></td>
+      <td><%= account.balance %></td>
+      <td><%= account.user.firstname %></td>
+      <td><%= account.bank.title %></td>
+      <td><%= account.status %></td>
+      <td>
+       <button class="btn btn-light"><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></button>
+       
+       <button class="btn btn-light"><%= link_to 'Edit', edit_account_path(account) %></button>
+      
+       <button class="btn btn-light"><%= link_to 'Show', account_path(account) %></button>
+      <%if current_user.admin? && account.status="pending"%>
+       <button class="btn btn-light"><%= link_to 'Approve', approve_account_path(account) %></button>
+      <%end%>
+     </td>
+      
+
+    </tr>
+    <%end%>
+ </tbody>
+ </thead>
+ </table>
+ <script>
+ $(document).ready( function () {
+  $('#account-table-id').DataTable();
+} );
+ </script>
