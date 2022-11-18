@@ -13,4 +13,11 @@ class User < ApplicationRecord
   def set_default_role
      self.role ||= :user
   end
+  def has_account
+    if self.accounts
+      return true
+    else
+      return false
+    end 
+  end
 end

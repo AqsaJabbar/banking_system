@@ -1,8 +1,9 @@
 class Account < ApplicationRecord
   belongs_to :bank
   belongs_to :user
+  # has_many :transactions, dependent: :destroy
   before_create :generate_token
-  enum type: [
+  enum account_type: [
     :current,
     :saving
   ]
@@ -16,7 +17,6 @@ class Account < ApplicationRecord
      self.status ||= :pending
   end
   def generate_token
-    debugger
-    self.account_no=SecureRandom.hex(10)
+    self.account_no=SecureRandom.hex(2)
   end
 end

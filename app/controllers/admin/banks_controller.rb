@@ -30,6 +30,9 @@ class BanksController < ApplicationController
         @bank.destroy
         redirect_to admin_banks_path
     end
+    def sub
+        @account=Bank.find(params[:id]).accounts 
+      end 
     private
     def find_record 
         @bank=Bank.find(params[:id])

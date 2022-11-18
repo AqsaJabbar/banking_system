@@ -6,15 +6,12 @@
                     <span class="fs-5 d-none d-sm-inline">Ecommerce</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">          
-                
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-black" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                     Banks </a>
-          <ul class="dropdown-menu dropdown-menu-light text-small shadow">
-            <li><a class="dropdown-item" href="/admin/banks">All Banks</a></li>
-            <li><a class="dropdown-item" href="/admin/banks/new">Add New Bank</a></li>
-          </ul>
-        </li>           
+                <%if current_user.admin?%>
+                <li>
+                <a  href="/admin/banks" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">All Banks</span> </a>
+                 </a>
+            </li>     
             <li>
                 <a  href="/admin/users" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">All Users</span> </a>
@@ -25,6 +22,19 @@
                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">All Accounts</span> </a>
                  </a>
             </li>
+            <%else%>
+            <li>
+                <a  href="/accounts/new" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">New Account</span> </a>
+                 </a>
+            </li>
+            <li>
+                <a  href="/accounts" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">All Accounts</span> </a>
+                 </a>
+            </li>
+            
+            <%end%>
             <li>
                 <a href="/users/sign_out" data-method="delete"  class="nav-link px-0 align-middle ">
                 <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">LogOut</span></a>

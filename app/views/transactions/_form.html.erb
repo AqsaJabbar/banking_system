@@ -1,0 +1,62 @@
+<div class="form-group">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+<%= form_for @transaction, url: path, method: method_type, local: true do |f| %>
+
+    <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@transaction.errors.count, "error") %> prohibited
+        this transaction from being saved:
+      </h2>
+      <ul>
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <%= f.text_field :sender_account ,class: 'col-lg-4 form-control',
+      value: @account.account_no, type: :hidden%>
+   <br/>
+   <%@banks=Bank.all%>
+   <div class="form-label"><%= f.label :bank %></div>
+      <%= f.select :bank_id, options_for_select(@banks.collect { |bank|
+    [bank.title.titleize, @bank=bank,bank.id] }, 1), {}, { id: 'bank_select'} %>
+ <br />
+   
+   <div class="form-label"><%= f.label :reciever_account %></div>
+   
+ <%= f.select :reciever_account,"", {}, :id => "reciever_select"%>
+    <br /> 
+   
+   <div class="form-label"><%= f.label :ammount %></div>
+      <%= f.text_field :amount ,class: 'col-lg-4 form-control'%>
+   <br/>
+   <center><div class="btn btn-gray">
+      <%= f.submit %>
+      </div></center>
+    
+    
+  <% end %>
+</div>  
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+   $('#bank_select').on('change', function() {
+     var bankid = $(this).val();
+    $.ajax({
+      url: `/admin/banks/${bankid}/sub`,
+        type: "get",
+        success: function (data) {
+          
+        }
+    });
+});
+</script>

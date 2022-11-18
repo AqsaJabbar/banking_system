@@ -1,0 +1,37 @@
+<h1>Listing transactions</h1>
+  
+<table id="transaction-table-id" class="table">
+<thead class="thead-light">
+  <tr>
+    <th scope="col">Sender</th>
+    <th scope="col">Reciever</th>
+    <th scope="col">Amount</th>
+    <th scope="col">Actions</th>
+  </tr>
+ </thead>
+ <tbody>
+  <% @transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.sender_account %></td>
+      <td><%= transaction.reciever_account %></td>
+      <td><%= transaction.amount %></td>
+     <td>
+       <button class="btn btn-light"><%= link_to 'Destroy', account_transaction_path(@account.id,transaction), method: :delete, data: { confirm: 'Are you sure?' } %></button>
+       
+       <button class="btn btn-light"><%= link_to 'Edit', edit_account_transaction_path(@account.id,transaction) %></button>
+      
+       <button class="btn btn-light"><%= link_to 'Show', account_transaction_path(@account.id,transaction) %></button>
+    
+     </td>
+      
+
+    </tr>
+    <%end%>
+ </tbody>
+ </thead>
+ </table>
+ <script>
+ $(document).ready( function () {
+  $('#transaction-table-id').DataTable();
+} );
+ </script>
