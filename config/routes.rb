@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :accounts do
     member do
       get :approve
+      get :find_reciever
     end
     resources :transactions
   end

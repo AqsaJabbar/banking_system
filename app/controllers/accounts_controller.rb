@@ -37,6 +37,9 @@ class AccountsController < ApplicationController
         @account.update(status: "active")
         redirect_to accounts_path    
       end
+    def find_reciever
+        @rec_name=Account.find_by(account_no: params[:id])
+    end
     private
     def find_record 
         @account=Account.find(params[:id])

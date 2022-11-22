@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
     before_action :find_record, only: [:show, :edit,:update,:destroy]
     def index
         @account=Account.find(params[:account_id]) 
-        @transactions=Transaction.all
+        @transactions=current_user.transactions
     end
     def new 
         @transaction=Transaction.new
@@ -13,7 +13,8 @@ class TransactionsController < ApplicationController
         if @transaction.save
             redirect_to account_transactions_path 
         else
-            render 'new'
+            flash.alert="Unsuccessfull transaction"
+            redirect_to accounts_path
         end  
     end
     def show 
@@ -41,6 +42,6 @@ class TransactionsController < ApplicationController
         @account=Account.find(params[:account_id])
     end
     def transaction_params
-      params.require(:transaction).permit(:sender_account,:reciever_account,:amount,:bank_id)
+      params.require(:transaction).permit(:sender_account,:reciever_account,:amount,:bank_id,:reciever_title,:user_id)
     end
 end

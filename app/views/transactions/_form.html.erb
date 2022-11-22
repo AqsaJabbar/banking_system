@@ -20,7 +20,9 @@
     </div>
   <% end %>
       <%= f.text_field :sender_account ,class: 'col-lg-4 form-control',
-      value: @account.account_no, type: :hidden%>
+      value: @account.account_no, type: :hidden, id: 'sender'%>
+      <%= f.text_field :user_id ,class: 'col-lg-4 form-control',
+      value: current_user.id, type: :hidden%>
    <br/>
    <%@banks=Bank.all%>
    <div class="form-label"><%= f.label :bank %></div>
@@ -28,11 +30,20 @@
     [bank.title.titleize, @bank=bank,bank.id] }, 1), {}, { id: 'bank_select'} %>
  <br />
    
-   <div class="form-label"><%= f.label :reciever_account %></div>
+   <%
+=begin%>
+ <div class="form-label"><%= f.label :reciever_account %></div>
    
  <%= f.select :reciever_account,"", {}, :id => "reciever_select"%>
-    <br /> 
-   
+    <br />  
+<%
+=end%>
+    <div class="form-label"><%= f.label :reciever_account %></div>
+      <%= f.text_field :reciever_account ,class: 'col-lg-4 form-control',id: 'reciever'%>
+   <br/>
+   <div class="form-label"><%= f.label :reciever_name %></div>
+      <%= f.text_field :reciever_title ,class: 'col-lg-4 form-control',id: 'reciever_title'%>
+   <br/>
    <div class="form-label"><%= f.label :ammount %></div>
       <%= f.text_field :amount ,class: 'col-lg-4 form-control'%>
    <br/>
@@ -49,10 +60,10 @@
 </div>
 </div>
 <script>
-   $('#bank_select').on('change', function() {
-     var bankid = $(this).val();
+   $('#reciever').on('change', function() {
+     var rec = $(this).val();
     $.ajax({
-      url: `/admin/banks/${bankid}/sub`,
+      url: `/accounts/${rec}/find_reciever`,
         type: "get",
         success: function (data) {
           
