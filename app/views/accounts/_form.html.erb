@@ -1,0 +1,47 @@
+<div class="form-group">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+<%= form_for @account, url: path, method: method_type, local: true do |f| %>
+
+    <% if @account.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@account.errors.count, "error") %> prohibited
+        this account from being saved:
+      </h2>
+      <ul>
+        <% @account.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <div class="form-label"><%= f.label :title %></div>
+      <%= f.text_field :title ,class: 'col-lg-4 form-control'%>
+   <br/>
+   <div class="form-label"><%= f.label :balance %></div>
+      <%= f.text_field :balance ,class: 'col-lg-4 form-control'%>
+   <br/>
+   <div class="form-label"><%= f.label :bank %></div>
+      <%= f.collection_select(:bank_id, Bank.all, :id, :title, prompt: true) %>
+      <br />
+      <%= f.number_field :user_id,
+    value: current_user.id , type: :hidden%>
+  <div class="form-label"><%= f.label :account_type %></div>
+      <%= f.select :account_type, ['current','saving'], autofocus: true, autocomplete: "account_type",{}=> { class: 'form-control' } %>
+      <br />
+   <center><div class="btn btn-gray">
+      <%= f.submit %>
+      </div></center>
+    
+    
+  <% end %>
+</div>  
+</div>
+</div>
+</div>
+</div>
+</div>

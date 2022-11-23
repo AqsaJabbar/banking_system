@@ -1,0 +1,28 @@
+<div class="form-group">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <div class="card">
+                <div class="card-body">
+<p>
+<strong>Sender:</strong>
+  <%= @transaction.sender_account %>
+</p>
+<p>
+<strong>Reciever:</strong>
+  <%= @transaction.reciever_account %>
+</p>
+<p>
+<strong>Amount:</strong>
+  <%= @transaction.amount %>
+</p>
+</div>
+</div>
+    </div>
+    </div>
+    </div>
+    </div>
+<center>
+     <%= link_to 'Back', account_transactions_path(@account) %>
+</center>
+<br>

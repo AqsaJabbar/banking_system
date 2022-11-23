@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         has_many :accounts, dependent: :destroy
+         has_many :transactions, dependent: :destroy
   enum role: [
     :user,
     :admin
@@ -11,5 +13,12 @@ class User < ApplicationRecord
 
   def set_default_role
      self.role ||= :user
+  end
+  def has_account
+    if self.accounts
+      return true
+    else
+      return false
+    end 
   end
 end
