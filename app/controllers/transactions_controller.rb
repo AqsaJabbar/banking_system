@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
     def index
         @account=Account.find(params[:account_id]) 
         @transactions=current_user.transactions
+        @recieved=Transaction.where(reciever_account: @account.account_no)
     end
     def new 
         @transaction=Transaction.new
