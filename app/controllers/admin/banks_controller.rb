@@ -1,6 +1,6 @@
 module Admin
 class BanksController < ApplicationController
-    before_action :find_record, only: [:show, :edit,:update,:destroy]
+    include BankConcern
     def index 
         @banks=Bank.all
     end
@@ -8,35 +8,20 @@ class BanksController < ApplicationController
         @bank=Bank.new
     end
     def create 
-        @bank=Bank.create(bank_params)
-        if @bank.save
-            redirect_to admin_banks_path 
-        else
-            render 'new'
-        end  
+        create_bank
     end
     def show 
     end
     def edit 
     end
     def update 
-        if @bank.update(bank_params)
-            redirect_to admin_bank_path(@bank)
-          else
-            render 'edit'
-          end
+        update_bank
     end 
     def destroy
         @bank.destroy
         redirect_to admin_banks_path
     end
-    def sub
-        @account=Bank.find(params[:id]).accounts 
-      end 
     private
-    def find_record 
-        @bank=Bank.find(params[:id])
-    end
     def bank_params
       params.require(:bank).permit(:title)
     end

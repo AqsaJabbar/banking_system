@@ -1,10 +1,12 @@
-<h1>Listing transactions</h1>
+<h1>Listing Transactions of <%= current_user.firstname%></h1>
   
 <table id="transaction-table-id" class="table">
 <thead class="thead-light">
   <tr>
     <th scope="col">Sender</th>
     <th scope="col">Reciever</th>
+     <th scope="col">Sender's Name</th>
+    <th scope="col">Reciever's Name</th>
     <th scope="col">Amount</th>
     <th scope="col">Actions</th>
   </tr>
@@ -14,40 +16,12 @@
     <tr>
       <td><%= transaction.sender_account %></td>
       <td><%= transaction.reciever_account %></td>
-      <td><%= transaction.amount %></td>
-     <td>
-       <button class="btn btn-light"><%= link_to 'Edit', edit_account_transaction_path(@account.id,transaction) %></button>
-      
-       <button class="btn btn-light"><%= link_to 'Show', account_transaction_path(@account.id,transaction) %></button>
-    
-     </td>
-      
-
-    </tr>
-    <%end%>
- </tbody>
- </thead>
- </table>
-
-
-<h1>Recieved transactions</h1>
-  
-<table id="recieved-trans-table-id" class="table">
-<thead class="thead-light">
-  <tr>
-    <th scope="col">Sender</th>
-    <th scope="col">Reciever</th>
-    <th scope="col">Name</th>
-    <th scope="col">Amount</th>
-  </tr>
- </thead>
- <tbody>
-  <% @recieved.each do |transaction| %>
-    <tr>
-      <td><%= transaction.sender_account %></td>
-      <td><%= transaction.reciever_account %></td>
+      <td><%= transaction.account.title%></td>
       <td><%= transaction.reciever_title %></td>
       <td><%= transaction.amount %></td>
+     <td>
+       <button class="btn btn-light"><%= link_to 'Show', account_transaction_path(@account.id,transaction) %></button>
+     </td>
       
 
     </tr>
