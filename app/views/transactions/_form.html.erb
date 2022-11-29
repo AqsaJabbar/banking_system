@@ -21,6 +21,8 @@
   <% end %>
       <%= f.text_field :sender_account ,class: 'col-lg-4 form-control',
       value: @account.account_no, type: :hidden, id: 'sender'%>
+      <%= f.text_field :account_id ,class: 'col-lg-4 form-control',
+      value: @account.id, type: :hidden, id: 'account'%>
       <%= f.text_field :user_id ,class: 'col-lg-4 form-control',
       value: current_user.id, type: :hidden%>
    <br/>

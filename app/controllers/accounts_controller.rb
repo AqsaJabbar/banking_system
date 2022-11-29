@@ -1,49 +1,26 @@
 class AccountsController < ApplicationController
-    before_action :find_record, only: [:show, :edit,:update,:destroy,:approve]
-    def index 
-        if current_user.admin?
-           @accounts=Account.all
-        else
-            @accounts=current_user.accounts
-        end
+    include AccountsConcern
+     def index 
+        all_accounts
     end
     def new 
         @account=Account.new
     end
     def create 
-        @account=Account.create(account_params)
-        if @account.save
-            redirect_to accounts_path 
-        else
-            render 'new'
-        end  
+        create_account
     end
     def show 
     end
     def edit 
     end
     def update 
-        if @account.update(account_params)
-            redirect_to account_path(@account)
-          else
-            render 'edit'
-          end
+        update_account
     end 
     def destroy
         @account.destroy
         redirect_to accounts_path
     end
-    def approve
-        @account.update(status: "active")
-        redirect_to accounts_path    
-      end
-    def find_reciever
-        @rec_name=Account.find_by(account_no: params[:id])
-    end
     private
-    def find_record 
-        @account=Account.find(params[:id])
-    end
     def account_params
       params.require(:account).permit(:account_no,:title,:account_type,:status,:balance,:user_id,:bank_id)
     end

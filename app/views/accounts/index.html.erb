@@ -24,9 +24,11 @@
       <td><%= account.bank.title %></td>
       <td><%= account.status %></td>
       <td>
-      <%if !account.pending?%>
+      <%if account.active?%>
       <button class="btn btn-light"><%= link_to 'New Transaction', new_account_transaction_path(account) %></button>
       <%end%>
+      <button class="btn btn-light"><%= link_to 'All Transaction', account_transactions_path(account) %></button>
+      
        <button class="btn btn-light"><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></button>
        
        <button class="btn btn-light"><%= link_to 'Edit', edit_account_path(account) %></button>
