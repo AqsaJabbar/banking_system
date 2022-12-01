@@ -22,6 +22,7 @@ module AccountsConcern
         end  
     end
     def all_accounts
+        @transaction=Transaction.new
         if current_user.admin?
             #    @accounts=Account.rich.all
             @accounts=Account.all

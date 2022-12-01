@@ -4,8 +4,6 @@ module Validation
         validates :reciever_account, presence: true
         validates :amount, presence: true
         validate :check_and_update_balance
-        belongs_to :user
-        belongs_to :account
     end
     def check_and_update_balance
         receiver = Account.find_by(account_no: self.reciever_account)
@@ -15,7 +13,7 @@ module Validation
            receiver.update(balance: (receiver.balance).to_i + amount.to_i) 
            return true
         else
-          errors[:self] << "Add your validation message here"
+          errors[:self] << "You Don't have enough balance to do this transaction"
           return false 
         end
     end

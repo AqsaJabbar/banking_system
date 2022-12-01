@@ -9,7 +9,7 @@ module TransactionConcern
             redirect_to account_transactions_path 
         else
             flash.alert="Unsuccessfull transaction"
-            redirect_to accounts_path
+            render 'new'
         end  
     end
     def find_record 
