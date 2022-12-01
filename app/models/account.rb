@@ -1,6 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :bank
   belongs_to :user
+  validates :title,presence: :true
   # scope :rich,->{ where('balance >= ?',"500000")}
   has_many :transactions, dependent: :destroy
   before_create :generate_token

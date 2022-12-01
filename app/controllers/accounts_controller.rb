@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+    load_and_authorize_resource
     include AccountsConcern
      def index 
         all_accounts

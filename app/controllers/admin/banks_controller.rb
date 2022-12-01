@@ -1,5 +1,6 @@
 module Admin
 class BanksController < ApplicationController
+    load_and_authorize_resource
     include BankConcern
     def index 
         @banks=Bank.all

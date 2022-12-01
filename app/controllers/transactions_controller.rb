@@ -1,8 +1,9 @@
 class TransactionsController < ApplicationController
+    load_and_authorize_resource
     include TransactionConcern
     def index
         @account=Account.find(params[:account_id])
-        @transactions = Transaction.where("sender_account = ? or reciever_account = ?", @account.account_no,@account.account_no)
+        @transactions = Transaction.sent_recieved_transactions(@account)
     end
     def new 
         @transaction=Transaction.new
