@@ -30,8 +30,6 @@
  </tbody>
  </thead>
  </table>
- <script>
- $(document).ready( function () {
-  $('#bank-table-id').DataTable();
-} );
- </script>
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "banking.js" %>
+<% end %>

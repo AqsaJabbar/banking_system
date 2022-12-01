@@ -27,10 +27,6 @@
     <%end%>
   </tbody>
 </table>
-
-<br>
-<script>
- $(document).ready( function () {
-  $('#user-table-id').DataTable();
-} );
- </script>
+<% content_for :javascript_includes do %>
+<%= javascript_include_tag "banking.js" %>
+<%end%>

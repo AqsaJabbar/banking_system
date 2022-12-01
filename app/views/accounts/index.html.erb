@@ -24,15 +24,17 @@
       <td><%= account.bank.title %></td>
       <td><%= account.status %></td>
       <td>
-      <%if !account.pending?%>
+      <%if account.status=="active" && current_user.user?%>
       <button class="btn btn-light"><%= link_to 'New Transaction', new_account_transaction_path(account) %></button>
       <%end%>
+      <button class="btn btn-light"><%= link_to 'All Transaction', account_transactions_path(account) %></button>
+      
        <button class="btn btn-light"><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></button>
        
        <button class="btn btn-light"><%= link_to 'Edit', edit_account_path(account) %></button>
       
        <button class="btn btn-light"><%= link_to 'Show', account_path(account) %></button>
-      <%if current_user.admin? && account.status="pending"%>
+      <%if current_user.admin? && account.status=="pending"%>
        <button class="btn btn-light"><%= link_to 'Approve', approve_account_path(account) %></button>
       <%end%>
      </td>
@@ -43,8 +45,6 @@
  </tbody>
  </thead>
  </table>
- <script>
- $(document).ready( function () {
-  $('#account-table-id').DataTable();
-} );
- </script>
+ <% content_for :javascript_includes do %>
+  <%= javascript_include_tag "banking.js" %>
+<% end %>
