@@ -1,10 +1,12 @@
-<h1>Listing transactions</h1>
+<h1>Listing Transactions of <%= current_user.firstname%></h1>
   
 <table id="transaction-table-id" class="table">
 <thead class="thead-light">
   <tr>
     <th scope="col">Sender</th>
     <th scope="col">Reciever</th>
+     <th scope="col">Sender's Name</th>
+    <th scope="col">Reciever's Name</th>
     <th scope="col">Amount</th>
     <th scope="col">Actions</th>
   </tr>
@@ -14,14 +16,11 @@
     <tr>
       <td><%= transaction.sender_account %></td>
       <td><%= transaction.reciever_account %></td>
+      <td><%= transaction.account.title%></td>
+      <td><%= transaction.reciever_title %></td>
       <td><%= transaction.amount %></td>
      <td>
-       <button class="btn btn-light"><%= link_to 'Destroy', account_transaction_path(@account.id,transaction), method: :delete, data: { confirm: 'Are you sure?' } %></button>
-       
-       <button class="btn btn-light"><%= link_to 'Edit', edit_account_transaction_path(@account.id,transaction) %></button>
-      
        <button class="btn btn-light"><%= link_to 'Show', account_transaction_path(@account.id,transaction) %></button>
-    
      </td>
       
 
@@ -30,8 +29,7 @@
  </tbody>
  </thead>
  </table>
- <script>
- $(document).ready( function () {
-  $('#transaction-table-id').DataTable();
-} );
- </script>
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "banking.js" %>
+<% end %>
+ 

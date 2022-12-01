@@ -11,6 +11,7 @@ gem 'devise'
 gem 'bootstrap', '~> 5.0.2'
 gem 'jquery-rails'
 gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'cancancan'
 group :development do
   gem 'letter_opener_web', '~> 2.0'
 end
